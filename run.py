@@ -1,14 +1,13 @@
 #!/usr/bin/env python3.7
 # -*- coding: utf-8 -*-
 
+import sched, time
 from slackbot.bot import Bot
 
-def main():
+s = sched.scheduler(time.time, time.sleep)
+
+def app():
     bot = Bot()
     bot.run()
 
-app = main()
-
-if __name__ == "__main__":
-    print('Running slackbot...')
-    main()
+s.enter(10, 1, app)
