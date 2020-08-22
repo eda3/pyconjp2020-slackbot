@@ -6,7 +6,7 @@ from slackbot.bot import Bot
 
 app = Flask(__name__)
 
-@app.route('/')
+@app.route('/', methods=['POST'])
 def main():
     bot = Bot()
     bot.run()
