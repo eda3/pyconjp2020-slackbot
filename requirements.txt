@@ -1,0 +1,4 @@
+Flask==1.1.2
+gunicorn==20.0.4
+google-cloud-secret-manager==1.0.0
+slackbot==1.0.0
