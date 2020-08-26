@@ -21,7 +21,7 @@ Follow: https://cloud.google.com/container-registry/docs/advanced-authentication
 
 * Or, you can build from source code within this repository, in which case, you will also need to access the secrets within GCP.
 
-* Create channel 'errors' and add invite your bot to this channel.  Errors could be redirected by tweaking ERRORS_TO in slackbot_settings.py.
+* Create channel "errors" and invite your bot to this channel.  Errors could be redirected to elsewhere by tweaking ERRORS_TO in slackbot_settings.py.
 
 ## Reference
 
