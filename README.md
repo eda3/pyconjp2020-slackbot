@@ -15,9 +15,9 @@ Follow: https://cloud.google.com/container-registry/docs/advanced-authentication
 
 * Artifact Registry offers granular access control.  Consider migrating from Container Registry to Artifact Registry (me including).
 
-> docker run --name prod -dt gcr.io/PROJECT_ID/YOUR_IMAGE:latest
+> docker run --name test -dt gcr.io/PROJECT_ID/YOUR_IMAGE:latest
 
-> docker container ls -f name=prod
+> docker container ls -f name=test
 
 * Or, you can build from source code within this repository, in which case, you will also need to access the secrets within GCP.
 
@@ -27,6 +27,6 @@ Templates from: https://github.com/lins05/slackbot
 
 ## Special Thanks
 
-Ministry of the Environment Government of Japan.
+The Ministry of Environment, Japan.
 
 ![iriomote cat](https://www.env.go.jp/park/iriomote/guide/img/M19.jpg)

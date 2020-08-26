@@ -13,3 +13,4 @@ response = client.access_secret_version(name)
 API_TOKEN = response.payload.data.decode('UTF-8')
 DEFAULT_REPLY = 'はじめまして、西表山猫です。'
 PLUGINS = ['plugins']
+ERRORS_TO = 'maruse.shigeo'
