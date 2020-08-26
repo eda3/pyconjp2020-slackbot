@@ -15,7 +15,7 @@ Follow: https://cloud.google.com/container-registry/docs/advanced-authentication
 
 * Pull image from: gcr.io/PROJECT_ID/YOUR_IMAGE:latest
 
-* Artifact Registry offers granular access control.  Consider migrating from Container Registry to Artifact Registry (me including).
+* Artifact Registry offers granular access control.  Consider migrating from Container Registry to Artifact Registry.
 
 > docker run --name test -dt gcr.io/PROJECT_ID/YOUR_IMAGE:latest
 
