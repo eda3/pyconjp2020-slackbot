@@ -109,3 +109,7 @@ def help_jp(message):
 
     # Start a thread on the original message
     message.reply("こんなお返事もできるにゃー", in_thread=True)
+
+@respond_to('raise error')
+def raise_error(message):
+    message.reply('Simulating an error for you! {}'.format(1 / 0))
