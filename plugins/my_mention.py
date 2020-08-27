@@ -46,7 +46,7 @@ data['end'] = data['start'] + pd.to_timedelta(data['length_minutes'], unit='minu
 #    else:
 #        pass
 #
-@listen_to('who', re.IGNORECASE)
+@respond_to('who', re.IGNORECASE)
 def get_speaker(message):
     t = datetime.utcnow() + timedelta(hours=9)
     on_stage = data[(data['start'] <= t) & (data['end'] >= t)]['name']
@@ -55,7 +55,7 @@ def get_speaker(message):
     else:
         message.reply("It's {:%H:%M} now!  Who's on stage?\n{}".format(t, '\n'.join(on_stage.to_list())))
 
-@listen_to('what', re.IGNORECASE)
+@respond_to('what', re.IGNORECASE)
 def get_title(message):
     t = datetime.utcnow() + timedelta(hours=9)
     on_air= data[(data['start'] <= t) & (data['end'] >= t)]['title']
@@ -64,7 +64,7 @@ def get_title(message):
     else:
         message.reply("It's {:%H:%M} now!  What's on air?\n{}".format(t, '\n'.join(on_air.to_list())))
 
-@listen_to('だれ|誰', re.IGNORECASE)
+@respond_to('だれ|誰', re.IGNORECASE)
 def get_speaker_jp(message):
     t = datetime.utcnow() + timedelta(hours=9)
     on_stage = data[(data['start'] <= t) & (data['end'] >= t)]['name']
@@ -73,7 +73,7 @@ def get_speaker_jp(message):
     else:
         message.reply("ただいま {:%H:%M} ですのにゃ。ステージに居るのは…！\n{}".format(t, '\n'.join(on_stage.to_list())))
 
-@listen_to('なに|何', re.IGNORECASE)
+@respond_to('なに|何', re.IGNORECASE)
 def get_title_jp(message):
     t = datetime.utcnow() + timedelta(hours=9)
     on_air= data[(data['start'] <= t) & (data['end'] >= t)]['title']
@@ -102,7 +102,7 @@ def love(message):
 def love_jp(message):
     message.reply('愛情を感じるにゃん')
 
-@listen_to('Can someone help me?')
+@respond_to('Can someone help me?')
 def help(message):
     # Message is replied to the sender (prefixed with @user)
     message.reply('Yes, I can!')
@@ -113,7 +113,7 @@ def help(message):
     # Start a thread on the original message
     message.reply("Here's a threaded reply", in_thread=True)
 
-@listen_to('へるぷ|ヘルプ|お?助て?|お?たすけて?')
+@respond_to('へるぷ|ヘルプ|お?助て?|お?たすけて?')
 def help_jp(message):
     # Message is replied to the sender (prefixed with @user)
     message.reply('お任せあれ！')
