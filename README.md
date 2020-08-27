@@ -11,9 +11,11 @@ Follow: https://cloud.google.com/container-registry/docs/advanced-authentication
 
 ## Quick Start
 
+* Create channel "errors" and invite your bot to this channel.  Errors could be redirected to elsewhere by tweaking ERRORS_TO in slackbot_settings.py.
+
 * Pull image from: gcr.io/PROJECT_ID/YOUR_IMAGE:latest
 
-* Artifact Registry offers granular access control.  Consider migrating from Container Registry to Artifact Registry (me including).
+* Artifact Registry offers granular access control.  Consider migrating from Container Registry to Artifact Registry.
 
 > docker run --name test -dt gcr.io/PROJECT_ID/YOUR_IMAGE:latest
 
