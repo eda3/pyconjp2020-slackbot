@@ -3,6 +3,9 @@
 
 import google.auth
 from google.cloud import secretmanager
+from google.cloud import language
+from google.cloud.language import enums
+from google.cloud.language import types
 
 credentials, project = google.auth.default()
 

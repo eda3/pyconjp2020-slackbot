@@ -10,6 +10,9 @@ import tempfile
 import google.auth
 from google.cloud import secretmanager
 from google.cloud import storage
+from google.cloud import language
+from google.cloud.language import enums
+from google.cloud.language import types
 import pandas as pd
 
 credentials, project = google.auth.default()
@@ -28,10 +31,24 @@ z = zip(data['start_day'].to_list(), data['start_time'].to_list())
 data['start'] = [datetime.combine(d, t) for d, t in z]
 data['end'] = data['start'] + pd.to_timedelta(data['length_minutes'], unit='minutes')
 
+#def get_sentiment(message, content):
+#    document = types.Document(
+#        content=content,
+#        type=enums.Document.Type.PLAIN_TEXT
+#    )
+#    annotations = language.LanguageServiceClient().analyze_sentiment(document=document)
+#    message.reply('にゃっ？！')
+#    # Refer to: https://cloud.google.com/natural-language/docs/basics#interpreting_sentiment_analysis_values
+#    if (annotations.document_sentiment.score > 0.3) and (annotations.document_sentiment.magnitude > 1.5):
+#        raise ValueError(f'Clearly positive: {annotations.document_sentiment.score, annotations.document_sentiment.magnitude}')
+#    elif (annotations.document_sentiment.score < -0.3) and (annotations.document_sentiment.magnitude > 1.5):
+#        raise ValueError(f'Clearly negative: {annotations.document_sentiment.score, annotations.document_sentiment.magnitude}')
+#    else:
+#        pass
+#
 @listen_to('who', re.IGNORECASE)
 def get_speaker(message):
     t = datetime.utcnow() + timedelta(hours=9)
-    # t = datetime(2020, 8, 28, 14, 0)
     on_stage = data[(data['start'] <= t) & (data['end'] >= t)]['name']
     if len(on_stage) == 0:
         message.reply("It's {:%H:%M} now, but, sorry, nobody on stage.".format(t))
@@ -40,8 +57,7 @@ def get_speaker(message):
 
 @listen_to('what', re.IGNORECASE)
 def get_title(message):
-    # t = datetime.utcnow() + timedelta(hours=9)
-    t = datetime(2020, 8, 28, 14, 0)
+    t = datetime.utcnow() + timedelta(hours=9)
     on_air= data[(data['start'] <= t) & (data['end'] >= t)]['title']
     if len(on_air) == 0:
         message.reply("It's {:%H:%M} now, but, sorry, nothing on air.".format(t))
@@ -51,7 +67,6 @@ def get_title(message):
 @listen_to('だれ|誰', re.IGNORECASE)
 def get_speaker_jp(message):
     t = datetime.utcnow() + timedelta(hours=9)
-    # t = datetime(2020, 8, 28, 14, 0)
     on_stage = data[(data['start'] <= t) & (data['end'] >= t)]['name']
     if len(on_stage) == 0:
         message.reply("ただいま {:%H:%M} ですのにゃ。だれも居ない…".format(t))
@@ -60,8 +75,7 @@ def get_speaker_jp(message):
 
 @listen_to('なに|何', re.IGNORECASE)
 def get_title_jp(message):
-    # t = datetime.utcnow() + timedelta(hours=9)
-    t = datetime(2020, 8, 28, 14, 0)
+    t = datetime.utcnow() + timedelta(hours=9)
     on_air= data[(data['start'] <= t) & (data['end'] >= t)]['title']
     if len(on_air) == 0:
         message.reply("ただいま {:%H:%M} ですのにゃ。なにもやってない…".format(t))
@@ -74,7 +88,7 @@ def hi(message):
     # react with thumb up emoji
     message.react('+1')
 
-@respond_to('こんにちは|こんち|はろー?|ハロー')
+@respond_to('こんにちは|こんち|はろー?|ハロー?')
 def hi_jp(message):
     message.reply('こんにちは！')
     # react with thumb up emoji
@@ -112,4 +126,4 @@ def help_jp(message):
 
 @respond_to('raise error')
 def raise_error(message):
-    message.reply('Simulating an error for you! {}'.format(1 / 0))
+    raise ValueError('Simulating an error for you!')
